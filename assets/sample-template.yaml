@@ -32,4 +32,4 @@ rules:
 
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,Proxy
+  - MATCH,proxy
