@@ -10,6 +10,7 @@ import yaml
 from requests.adapters import HTTPAdapter
 
 from globals import logger
+from utils import get_retry_session
 
 
 class Clash:
@@ -103,8 +104,7 @@ class Clash:
 
     @property
     def is_ready(self):
-        s = requests.Session()
-        s.mount('http://', HTTPAdapter(max_retries=20))
+        s = get_retry_session(20)
         response = s.get(f'http://{self.external_controller}')
         if response.ok:
             return True

@@ -11,8 +11,8 @@
 ```bash
 #!/usr/bin/env bash
 subs=(
-	'http://subscripton-example-1/config.yaml'
-	'http://subscripton-example-2/config.yaml'
+    'http://subscripton-example-1/config.yaml'
+    'http://subscripton-example-2/config.yaml'
 )
 patterns=(
     '更新订阅'
@@ -25,7 +25,7 @@ outputConfigs=(
     '/path/to/output-1.yaml'
 )
 
-./main.py -s "${subs[@]}"  -t "${templateConfigs[@]}" -c -o "${outputConfigs[@]}"  -p "${patterns[@]}"
+./main.py -s "${subs[@]}" -t "${templateConfigs[@]}" -c -o "${outputConfigs[@]}" -p "${patterns[@]}"
 ```
 过滤效果也可在日志中查看：
 ```

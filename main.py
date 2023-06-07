@@ -65,7 +65,7 @@ if not CLASH_PATH.exists:
 parser = argparse.ArgumentParser()
 # fmt: off
 parser.add_argument('-s', '--subscriptions', help='subscription urls', nargs='+')
-parser.add_argument('-t', '--templates', help='templates paths', nargs='+')
+parser.add_argument('-t', '--templates', help='template paths', nargs='+')
 parser.add_argument('-o', '--outputs', help='output paths', nargs='+')
 parser.add_argument('-c', '--cache', help='using cache instead of re-download to speed up test', action='store_true')
 parser.add_argument('-d', '--days', help='cache live time in days, 0 for eternal', default=30)
