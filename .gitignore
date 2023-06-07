@@ -1,0 +1,8 @@
+.vscode
+log
+output
+templates
+*.ipynb
+*.sh
+*.pyc
+venv
