@@ -61,7 +61,7 @@ class ProxiesFilter:
         port, external_controller_port = [next(tcp_port_picker) for _ in range(2)]
         config = {
             'mixed-port': port,
-            'external-controller': f'localhost:{external_controller_port}',
+            'external-controller': f'127.0.0.1:{external_controller_port}',
             'ipv6': True,
             'mode': 'global',
             'proxies': raw_proxies,
@@ -71,9 +71,11 @@ class ProxiesFilter:
         clash = Clash(config)
         clash.run()
         while poll_timeout != 0:
+            logger.info('waiting for clash initialization...')
             if clash.is_ready:
                 break
             time.sleep(1)
+            poll_timeout -= 1
         else:
             logger.error(f'clash initialization polling failed')
             sys.exit(1)

@@ -22,12 +22,12 @@ class Clash:
         self.config = config
 
         # create tempfile
-        logger.info(f'creating temp config file')
         temp = tempfile.NamedTemporaryFile('w', delete=False)
         yaml.safe_dump(config, temp, allow_unicode=True)
         temp.close()
 
         self.config_path = temp.name
+        logger.info(f'creating temp config at {self.config_path}')
         self.process: subprocess.Popen = ...
 
     @property
@@ -105,7 +105,7 @@ class Clash:
     @property
     def is_ready(self):
         s = get_retry_session(20)
-        response = s.get(f'http://{self.external_controller}')
+        response = s.get(f'http://{self.external_controller}', proxies=None, timeout=3)
         if response.ok:
             return True
         return False

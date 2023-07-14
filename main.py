@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 import requests
 import yaml
 from colored import fg
+import debugpy
 
 from clash import Clash
 from globals import CACHE_DIR, CLASH_PATH, CLASH_URL, logger
@@ -68,8 +69,9 @@ parser.add_argument('-s', '--subscriptions', help='subscription urls', nargs='+'
 parser.add_argument('-t', '--templates', help='template paths', nargs='+')
 parser.add_argument('-o', '--outputs', help='output paths', nargs='+')
 parser.add_argument('-c', '--cache', help='using cache instead of re-download to speed up test', action='store_true')
-parser.add_argument('-d', '--days', help='cache live time in days, 0 for eternal', default=30)
+parser.add_argument('-d', '--days', help='cache live time in days, 0 for eternal', default=30, type=int)
 parser.add_argument('-p', '--patterns', help='proxy name patterns for filtering', nargs='*')
+parser.add_argument("--debug", action="store_true")
 # fmt: on
 args = parser.parse_args()
 
@@ -175,4 +177,11 @@ async def main():
 
 
 if __name__ == '__main__':
+    if args.debug:
+        debugpy.listen(5678)
+        print("Waiting for debugger attach")
+        debugpy.wait_for_client()
+        debugpy.breakpoint()
+        print("break on this line")
+
     asyncio.run(main())

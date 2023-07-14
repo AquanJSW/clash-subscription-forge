@@ -1,8 +1,9 @@
 .vscode
 log
-output
+outputs
 templates
 *.ipynb
 *.sh
 *.pyc
 venv
+Makefile

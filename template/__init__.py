@@ -23,12 +23,12 @@ class Template:
         names = [proxy['name'] for proxy in proxies]
         # fit
         config = copy.deepcopy(self.config)
-        config['proxies'] = proxies
+        if 'proxies' not in config:
+            config['proxies'] = []
+        config['proxies'] += proxies
         for proxy_group in config['proxy-groups']:
-            # create if no proxies
-            if 'proxies' not in proxy_group:
-                proxy_group['proxies'] = names
-            # append otherwise
-            else:
-                proxy_group['proxies'] += names
+            # skip if keep == True
+            if proxy_group.get('keep', False):
+                continue
+            proxy_group['proxies'] = proxy_group.get('proxies', []) + names
         return config
